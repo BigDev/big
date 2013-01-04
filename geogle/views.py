@@ -16,7 +16,11 @@ def IndexView(request):
 				else:
 					tsquery = tsquery + ' | ' + (word+':*')
 
-		articles = Article.objects.raw("SELECT id, title, abstract, author_id, date FROM geogle_article WHERE search_index @@@ to_tsquery(simples(%s));", [tsquery])
+		articles = Article.objects.raw("\
+				SELECT id, title, abstract, author_id, date FROM geogle_article\
+				WHERE search_index @@ to_tsquery(simples(%s))\
+				ORDER BY ts_rank(search_index, to_tsquery(simples(%s))) DESC;\
+			", [tsquery, tsquery])
 
 	return render_to_response('search.html', {"query":query, "articles":articles})
 
