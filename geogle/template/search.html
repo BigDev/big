@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="get" accept-charset="utf-8">
+	
+	<span id="search_query">Busca:</span>
+	<input type="text" name="q" value="{{ query }}">
+
+	<input type="submit" value="Continue &rarr;">
+</form>
+
+{% for article in articles %}
+	<a href="/article/{{ article.id }}">{{ article.title }}</a><br>
+	{{ article.author.name  }} - {{ article.date }}<br>
+	{{ article.abstract }}
+	<br><br>
+{% endfor %}
+
+
+{% endblock %}
