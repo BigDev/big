@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from geogle.models import Article
+from search.models import Article
 from string import punctuation
 
 def IndexView(request):
@@ -17,7 +17,7 @@ def IndexView(request):
 					tsquery = tsquery + ' | ' + (word+':*')
 
 		articles = Article.objects.raw("\
-				SELECT id, title, abstract, author_id, date FROM geogle_article\
+				SELECT id, title, abstract, author_id, date FROM search_article\
 				WHERE search_index @@ to_tsquery(simples(%s))\
 				ORDER BY ts_rank(search_index, to_tsquery(simples(%s))) DESC;\
 			", [tsquery, tsquery])

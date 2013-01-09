@@ -5,6 +5,7 @@
 	Abstract: {{ article.abstract }}<br>
 	Author: <a href="/?q={{ article.author.name }}">{{ article.author.name }}</a><br>
 	Date: {{ article.date }}<br>
+	File: <a href="/file/{{ article.pdf }}">{{ article.pdf }}</a><br>
 
 	Tags: 
 	{% for tag in article.tags.all %}

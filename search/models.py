@@ -13,6 +13,7 @@ class Article(models.Model):
 	abstract = models.TextField()
 	author = models.ForeignKey(Author)
 	date = models.DateField()
+	pdf = models.FileField(upload_to='articles')
 	tags = TaggableManager()
 
 	def __unicode__(self):
