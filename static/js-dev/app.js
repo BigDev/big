@@ -1,7 +1,7 @@
 App = Ember.Application.create();
 
 App.ApplicationView = Ember.View.extend({
-	templateName: 'big'
+	templateName: 'search'
 });
 App.ApplicationController = Ember.Controller.extend();
 
@@ -12,6 +12,9 @@ App.SearchController = Ember.Controller.extend();
 
 
 App.Router = Ember.Router.extend({
+	enableLogging: true,
+	location: 'hash',
+
 	root: Ember.Route.extend({
 		index: Ember.Route.extend({
 			route: '/',
