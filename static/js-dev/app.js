@@ -1,7 +1,7 @@
 App = Ember.Application.create();
 
 App.ApplicationView = Ember.View.extend({
-	templateName: 'search'
+	templateName: 'big'
 });
 App.ApplicationController = Ember.Controller.extend();
 
@@ -11,23 +11,13 @@ App.SearchView = Ember.View.extend({
 App.SearchController = Ember.Controller.extend();
 
 
-App.Router = Ember.Router.extend({
-	enableLogging: true,
-	location: 'hash',
+App.Router.map(function() {
+	this.route("index");
+	this.route("search");
+});
 
-	root: Ember.Route.extend({
-		index: Ember.Route.extend({
-			route: '/',
-			redirectsTo: 'search'
-		}),
-
-		search: Ember.Route.extend({
-			route: '/search',
-			connectOutlets: function(router) {
-				var tmp=router.get('applicationController');
-				console.log(tmp);
-				tmp.connectOutlet('search');
-			}
-		})
-	})
+App.IndexRoute = Ember.Route.extend({
+	redirect: function() {
+		this.transitionTo('search');
+	}
 });
