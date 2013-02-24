@@ -25,26 +25,26 @@
 
 		<script type="text/x-handlebars" data-template-name="search/index">
 			<h1>BIG Search</h1>
-			
-			{{#view App.SearchView}}
+		
 			<form>
 				<input class="input-block-level" type="text" name="query" />
 				<input class="btn" type="submit" />
-				<button class="btn">Advanced search</button>
+				{{#linkTo "search.adv"}}
+					<button class="btn">Advanced search</button>
+				{{/linkTo}}
 			</form>
-			{{/view}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="search/adv">
 			<h1>BIG Advanced Search</h1>
 			
-			{{#view App.AdvSearchView}}
 			<form>
 				<input class="input-block-level" type="text" name="query" />
 				<input class="btn" type="submit" />
-				<button class="btn">Simple search</button>
+				{{#linkTo "search.index"}}
+					<button class="btn">Simple search</button>
+				{{/linkTo}}
 			</form>
-			{{/view}}
 		</script>
 
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
