@@ -6,7 +6,12 @@ App.ApplicationView = Ember.View.extend({
 App.ApplicationController = Ember.Controller.extend();
 
 App.SearchIndexView = Ember.View.extend();
-App.SearchIndexController = Ember.Controller.extend();
+App.SearchIndexController = Ember.Controller.extend({
+	query: function(ev) {
+		console.log('is this working?');
+		
+	}
+});
 
 App.AdvSearchView = Ember.View.extend({
 });
@@ -29,3 +34,26 @@ App.IndexRoute = Ember.Route.extend({
 	}
 });
 
+App.SearchRoute = Ember.Route.extend({
+	events: {
+		query: function(ev) {
+			this.transitionTo('articles');
+		}
+	}
+});
+
+App.SearchIndexRoute = Ember.Route.extend({
+	events: {
+		changeToAdv: function(ev) {
+			this.transitionTo('search.adv');
+		}
+	}
+});
+
+App.SearchAdvRoute = Ember.Route.extend({
+	events: {
+		changeToSimple: function(ev) {
+			this.transitionTo('search.index');
+		}
+	}
+});

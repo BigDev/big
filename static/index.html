@@ -26,12 +26,10 @@
 		<script type="text/x-handlebars" data-template-name="search/index">
 			<h1>BIG Search</h1>
 		
-			<form>
+			<form id="simple-search-form" {{action query on="submit"}}>
 				<input class="input-block-level" type="text" name="query" />
 				<input class="btn" type="submit" />
-				{{#linkTo "search.adv"}}
-					<button class="btn">Advanced search</button>
-				{{/linkTo}}
+				<button class="btn" {{action changeToAdv}}>Advanced search</button>
 			</form>
 		</script>
 
@@ -41,9 +39,7 @@
 			<form>
 				<input class="input-block-level" type="text" name="query" />
 				<input class="btn" type="submit" />
-				{{#linkTo "search.index"}}
-					<button class="btn">Simple search</button>
-				{{/linkTo}}
+				<button class="btn" {{action changeToSimple}}>Simple search</button>
 			</form>
 		</script>
 
