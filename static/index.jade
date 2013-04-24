@@ -7,12 +7,26 @@ html
 		link(rel="stylesheet", href="css/normalize.css")
 		link(rel="stylesheet", href="css/style.css")
 	body
-		script(type="text/x-handlebars")
+		script(type="text/x-handlebars").
+			{{outlet}}
+		script#search(type="text/x-handlebars")
 			div#search-div
 				h1 BIG Search
 				form(method="post", name="search")
 					input(type="text", name="query")
 					input(type="submit", value="I submit")
+				button.
+					{{#linkTo adv-search}}Advanced search{{/linkTo}}
+		script#adv-search(type="text/x-handlebars")
+			div#search-div
+				h1 BIG Search
+				form(method="post", name="search")
+					input(type="text", name="title")
+					input(type="text", name="author")
+					input(type="submit", value="I submit")
+				button.
+					{{#linkTo search}}Basic search{{/linkTo}}
+		
 		script(src="js/libs/jquery-1.9.1.js")
 		script(src="js/libs/handlebars-1.0.0-rc.3.js")
 		script(src="js/libs/ember-1.0.0-rc.3.js")
