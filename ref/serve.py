@@ -32,15 +32,46 @@ class Server(object):
         # the application's modules.
         sys.path.insert(0, self.base_dir)
 
-	from lib.template import MakoLoader
-	cherrypy.tools.mako = cherrypy.Tool('on_start_resource', MakoLoader())
+        # Template engine tool
+        from lib.tool.template import MakoTool
+        cherrypy.tools.render = MakoTool()
 
-         # Let's mount the application so that CherryPy can serve it
-	from app.controller.root import Root
-	webapp = Root()
+        # Database access tool
+        from lib.tool.db import SATool
+        cherrypy.tools.db = SATool()
+
+        # Tool to load the logged in user or redirect
+        # the client to the login page
+        from lib.tool.user import UserTool
+        cherrypy.tools.user = UserTool()
+
+        # Our application
+        from webapp.app import Twiseless
+        webapp = Twiseless()
+        # Let's mount the application so that CherryPy can serve it
         app = cherrypy.tree.mount(webapp, '/', os.path.join(self.conf_path, "app.cfg"))
         self.make_rotate_logs(app)
-     
+
+        # Template engine plugin
+        from lib.plugin.template import MakoTemplatePlugin
+        engine.mako = MakoTemplatePlugin(engine, os.path.join(self.base_dir, 'template'),
+                                         os.path.join(self.base_dir, 'cache'))
+        engine.mako.subscribe()
+
+        # Database connection management plugin
+        from lib.plugin.db import SAEnginePlugin
+        engine.db = SAEnginePlugin(engine)
+        engine.db.subscribe()
+
+        # Twitter data loader plugin
+        from lib.plugin.tweet import TweetEnginePlugin
+        TweetEnginePlugin(engine, app.config['twitter']['freq']).subscribe()
+
+        # OAuth helper plugin
+        from lib.plugin.oauth import OAuthEnginePlugin
+        OAuthEnginePlugin(engine, app.config['oauth']['consumer_key'],
+                          app.config['oauth']['consumer_secret']).subscribe()
+        
     def run(self):
         engine = cherrypy.engine
         
@@ -57,6 +88,11 @@ class Server(object):
         # Run the engine main loop
         engine.block()
 
+    def on_error(self, status, message, traceback, version):
+        code = '404' if status.startswith('404') else 'error'
+        template = cherrypy.engine.publish('lookup-template', "%s.mako" % code).pop()
+        return template.render()
+        
     def make_rotate_logs(self, app):
         # see http://www.cherrypy.org/wiki/Logging#CustomHandlers
         log = app.log
@@ -67,16 +103,16 @@ class Server(object):
         
         maxBytes = getattr(log, "rot_maxBytes", 10485760)
         backupCount = getattr(log, "rot_backupCount", 5)
-       
+        
         # Make a new RotatingFileHandler for the error log.
-        fname = getattr(log, "rot_error_file", "./logs/error.log")
+        fname = getattr(log, "rot_error_file", "error.log")
         h = handlers.RotatingFileHandler(fname, 'a', maxBytes, backupCount)
         h.setLevel(logging.DEBUG)
         h.setFormatter(_cplogging.logfmt)
         log.error_log.addHandler(h)
         
         # Make a new RotatingFileHandler for the access log.
-        fname = getattr(log, "rot_access_file", "./logs/access.log")
+        fname = getattr(log, "rot_access_file", "access.log")
         h = handlers.RotatingFileHandler(fname, 'a', maxBytes, backupCount)
         h.setLevel(logging.DEBUG)
         h.setFormatter(_cplogging.logfmt)
