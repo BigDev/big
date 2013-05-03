@@ -14,3 +14,21 @@ Big.IndexRoute = Ember.Route.extend({
 		this.transitionTo('search');
 	}
 });
+
+Big.SearchView = Ember.View.extend({
+	templateName: 'search',
+	
+	init: function() {
+		this._super();
+		this.on('didInsertElement', this.centerVertically);
+	},
+	
+	centerVertically: function() {
+		var oh = this.$().outerHeight();
+		console.log(oh);		
+		var wh = $(window).height();
+		console.log(wh);
+
+		console.log(this.$());
+	}
+});
