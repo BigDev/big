@@ -4,7 +4,9 @@ Big.Router.map(function() {
 	this.resource('search', function() {
 		this.route('adv');
 	});
-	this.resource('articles');
+	this.resource('articles', function() {
+		this.route('info', {path: 'info/:article_id'});
+	});
 	this.resource('article', {path: ':article_id'});
 });
 
@@ -21,8 +23,13 @@ Big.ArticlesRoute = Ember.Route.extend({
 		this.render('article-list', {into: 'articles', outlet: 'articleList'});
 	},
 	model: function() {
-		console.log(Big.Article.find());
 		return Big.Article.find();
+	}
+});
+
+Big.ArticlesInfoRoute = Ember.Route.extend({
+	renderTemplate: function() {
+		this.render('article-info', {into: 'articles', outlet: 'articleInfo'});
 	}
 });
 
@@ -53,34 +60,35 @@ Big.Store = DS.Store.extend({
 Big.Article = DS.Model.extend({
 	title: DS.attr('string'),
 	author: DS.attr('string'),
-	abstrac: DS.attr('string')
+	abstrac: DS.attr('string'),
+	detail: DS.attr('string')
 });
 
 Big.Article.FIXTURES = [{
 	'id': 1,
 	'title': 'Article1',
 	'author': 'Author1',
-	'abstrac': 'This is an abstract act act act'
+	'abstrac': 'This is an abstract act act act',
+	'detail': 'Goddamn!'
 },
 {
 	'id': 2,
-	'title': 'Article1',
+	'title': 'Article2',
 	'author': 'Author1',
-	'abstrac': 'This is an abstract act act act'
+	'abstrac': 'This is an abstract act act act',
+	'detail': 'Goddamn!'
 },
 {
 	'id': 3,
-	'title': 'Article1',
+	'title': 'Article3',
 	'author': 'Author1',
-	'abstrac': 'This is an abstract act act act'
+	'abstrac': 'This is an abstract act act act',
+	'detail': 'Goddamn!'
 },
 {
 	'id': 4,
-	'title': 'Article1',
+	'title': 'Article4',
 	'author': 'Author1',
-	'abstrac': 'This is an abstract act act act'
+	'abstrac': 'This is an abstract act act act',
+	'detail': 'Goddamn!'
 }]
-
-Big.ArticlesController = Ember.Controller.extend({
-	
-});

@@ -42,7 +42,7 @@ html
 				div.span6.
 					{{outlet articleList}}
 				div.span6.
-					{{outlet articleDetails}}
+					{{outlet articleInfo}}
 
 		script#upper-search(type="text/x-handlebars")
 			h1 BIG
@@ -57,10 +57,11 @@ html
 					h3 {{title}}
 					span {{author}}
 					p {{abstrac}}
-				| {{/each}}
+					|{{#linkTo 'articles.info' this}}Detalhes{{/linkTo}}
+				| {{/each}}		
 		
 
-		script#article-details(type="text/x-handlebars")
+		script#article-info(type="text/x-handlebars")
 			h1 {{title}}
 		
 		script(src="js/libs/jquery-1.9.1.js")
