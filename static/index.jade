@@ -11,14 +11,14 @@ html
 		link(rel="stylesheet", href="css/big.min.css")
 	body
 		script(type="text/x-handlebars")
-			div.container-fluid
-				div.row-fluid.
-					{{outlet}}
+			div.container-fluid.
+				{{outlet}}
 
 		script#search(type="text/x-handlebars")
-			div#search-div.span4.offset4
-				h1 Busca BIG
-				| {{outlet}}
+			div.row-fluid
+				div#search-div.span4.offset4
+					h1 Busca BIG
+					| {{outlet}}
 		
 		script(id!="search/index",type="text/x-handlebars")
 			form(method="post", name="search")
@@ -34,9 +34,38 @@ html
 				input.btn.btn-primary(type="submit", value="Buscar")
 			button.btn.btn-info.
 				{{#linkTo 'search.index'}}Busca simples{{/linkTo}}
-				
+
+		script#articles(type="text/x-handlebars")
+			div.row-fluid.
+				{{outlet upperSearch}}
+			div.row-fluid
+				div.span6.
+					{{outlet articleList}}
+				div.span6.
+					{{outlet articleDetails}}
+
+		script#upper-search(type="text/x-handlebars")
+			h1 BIG
+			form(method="post", name="search")
+				input(type="text", name="query")
+				input.btn.btn-primary(type="submit", value="Buscar")
+		
+		script#article-list(type="text/x-handlebars")
+			ul
+				| {{#each model}}
+				li 
+					h3 {{title}}
+					span {{author}}
+					p {{abstrac}}
+				| {{/each}}
+		
+
+		script#article-details(type="text/x-handlebars")
+			h1 {{title}}
+		
 		script(src="js/libs/jquery-1.9.1.js")
 		script(src="js/libs/bootstrap.min.js")
 		script(src="js/libs/handlebars-1.0.0-rc.3.js")
 		script(src="js/libs/ember-1.0.0-rc.3.js")
+		script(src="js/libs/ember-data-latest.min.js")
 		script(src="js/app.js")
