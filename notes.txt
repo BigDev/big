@@ -1,15 +1,14 @@
 
 - Terminar de organizar o servidor e configurar o cherrypy - OK!
 - Saber se os arquivos estaticos estao funcionando - OK!
-
-- Fazer o mako funcionar corretamente com o cherrypy
+- Fazer o mako funcionar corretamente com o cherrypy - OK!
 
 - Verificar como fica o controle de acesso
-
-- Verificar como subir arquivos em cherrypy
 
 - Linkar o postgres com a aplicação
 
 - Linkar o solr com a aplicação
 
 
+http://tools.cherrypy.org/wiki/AuthenticationAndAccessRestrictions
+https://bitbucket.org/Lawouach/twiseless/overview

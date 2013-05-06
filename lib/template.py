@@ -37,3 +37,4 @@ class MakoLoader(object):
         # Replace the current handler.
         cherrypy.request.template = t = lookup.get_template(filename)
         cherrypy.request.handler = MakoHandler(t, cherrypy.request.handler)
+
