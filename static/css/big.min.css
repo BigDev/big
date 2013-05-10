@@ -1,1 +1,1 @@
-#search-div{position:absolute}#search-div button a{text-decoration:none;color:white}
+#search-div{position:absolute}#search-div div{text-align:center}#search-div input[type="submit"],#search-div button{margin-left:1%}#search-div input[type="submit"]:first-child,#search-div button:first-child{margin-left:0}#search-div h1{text-align:center}#search-div button a{text-decoration:none;color:white}

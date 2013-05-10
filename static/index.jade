@@ -22,10 +22,11 @@ html
 		
 		script(id!="search/index",type="text/x-handlebars")
 			form(method="post", name="search")
-				input.input-block(type="text", name="query")
-				input.btn.btn-primary(type="submit", value="Buscar")
-			button.btn.btn-info.
-				{{#linkTo 'search.adv'}}Busca avançada{{/linkTo}}
+				input.input-block-level(type="text", name="query")
+				div
+					input.btn.btn-primary(type="submit", value="Buscar")
+					button.btn.btn-info.
+						{{#linkTo 'search.adv'}}Busca avançada{{/linkTo}}
 		
 		script(id!="search/adv",type="text/x-handlebars")
 			form(method="post", name="adv-search")

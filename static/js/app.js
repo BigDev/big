@@ -48,16 +48,15 @@ Big.SearchView = Ember.View.extend({
 	init: function() {
 		this._super();
 		this.on('didInsertElement', this.centerVertically);
+		$(window).resize(this.centerVertically);
 	},
 	
 	centerVertically: function() {
-		var oh = this.$().outerHeight();
-		console.log(oh);		
+		var sdiv = $('#search-div');
+		var oh = $(sdiv).height();
 		var wh = $(window).height();
-		console.log(wh);
 
-		console.log(this.$().find('#search-div').height());
-		console.log(this.$());
+		$(sdiv).css('top', wh/2-oh/2);
 	}
 });
 
