@@ -8,7 +8,7 @@ script#articles(type="text/x-handlebars")
 			{{outlet articleInfo}}
 
 script#article-list(type="text/x-handlebars")
-	ul
+	ul.article-list
 		| {{#each model}}
 		li 
 			|{{#linkTo 'article' this}}
@@ -18,8 +18,6 @@ script#article-list(type="text/x-handlebars")
 			span {{author}}
 			p {{abstrac}}
 			|{{#linkTo 'articles.info' this}}Detalhes{{/linkTo}}
+			hr
 		| {{/each}}		
 		
-
-
-

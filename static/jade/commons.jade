@@ -1,10 +1,12 @@
 script#upper-search(type="text/x-handlebars")
-	div.span2
-		h1 BIG
-	div.span9
-		form(method="post", name="search")
-			input(type="text", name="query")
-			input.btn.btn-primary(type="submit", value="Buscar")
+	div#upper-bar.span12
+		div.span2
+			h1 BIG Busca
+		form.form-inline(method="post", name="search")
+			div.span4.offset1
+				input.input-block-level(type="text", name="query")
+			div.span1
+				input.btn.btn-primary(type="submit", value="Buscar")
 		
 script#article-info(type="text/x-handlebars")
 	h1 {{title}}
