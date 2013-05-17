@@ -1,8 +1,9 @@
 script#results(type="text/x-handlebars")
 	div.row-fluid
 		| {{outlet upperSearch}}
-	div.row-fluid
-		div.span8.
+	div#results.row-fluid
+		hr
+		div.span7.
 			{{outlet articleList}}
 		div.span4.
 			{{outlet articleInfo}}
@@ -10,14 +11,16 @@ script#results(type="text/x-handlebars")
 script#article-list(type="text/x-handlebars")
 	ul.article-list
 		| {{#each model}}
-		li 
+		li
 			|{{#linkTo 'article' this}}
 			h3 {{title}}
 			|{{/linkTo}}
 
-			span {{author}}
-			p {{abstrac}}
-			|{{#linkTo 'results.info' this}}Detalhes{{/linkTo}}
-			hr
+			span.
+				{{year}}
+				{{#each author in authors}}
+					, {{author.name}}
+				{{/each}}
+			{{#linkTo 'results.info' this}}Detalhes{{/linkTo}}
 		| {{/each}}		
 		

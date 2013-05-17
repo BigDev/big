@@ -1,8 +1,27 @@
-@almost-white: #eee;
+@almost-white: #fefefe;
+@light-grey: #eee;
 
 ul.article-list {
 	list-style-type: none;
 	background-color: @almost-white;
+	margin:0;
+
+	li {
+		h3 {
+			margin: 0;
+		}
+
+		border: solid 1px @light-grey;
+		border-top: 0;		
+		border-left: 0;
+
+		padding-left: 1%;
+		padding-bottom: 1%;
+	}
 }
 
-
+#results {
+	hr {
+		margin: 0;
+	}
+}

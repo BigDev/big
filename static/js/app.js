@@ -65,38 +65,75 @@ Big.Store = DS.Store.extend({
 	adapter: 'DS.FixtureAdapter'
 });
 
+Big.Author = DS.Model.extend({
+	name: DS.attr('string')
+});
+
+Big.Keyword = DS.Model.extend({
+	word: DS.attr('string')
+});
+
 Big.Article = DS.Model.extend({
 	title: DS.attr('string'),
-	author: DS.attr('string'),
+	authors: DS.hasMany('Big.Author'),
 	abstrac: DS.attr('string'),
-	detail: DS.attr('string')
+	year: DS.attr('number'),
+	capes: DS.attr('string'),
+	periodic: DS.attr('string'),
+	keywords: DS.hasMany('Big.Keyword')
 });
+
+Big.Author.FIXTURE = [{
+	'id': 1,
+	'name': 'Author1'
+},
+{
+	'id': 2,
+	'name': 'Author2'
+}];
+
+Big.Keyword.FIXTURE = [{
+	'id': 1,
+	'word': 'word1'
+},
+{
+	'id': 2,
+	'word': 'word2'
+}];
 
 Big.Article.FIXTURES = [{
 	'id': 1,
 	'title': 'Article1',
-	'author': 'Author1',
+	'authors': [1],
 	'abstrac': 'This is an abstract act act act',
-	'detail': 'Goddamn!'
+	'year': 2007,
+	'periodic': 'a',
+	'keywords:': [1]
 },
 {
 	'id': 2,
 	'title': 'Article2',
-	'author': 'Author1',
+	'authors': [1,2],
 	'abstrac': 'This is an abstract act act act',
-	'detail': 'Goddamn!'
+	'year': 2007,
+	'periodic': 'a',
+	'keywords:': [1]
 },
 {
 	'id': 3,
 	'title': 'Article3',
-	'author': 'Author1',
+	'authors': [2],
 	'abstrac': 'This is an abstract act act act',
-	'detail': 'Goddamn!'
+	'year': 2007,
+	'periodic': 'a',
+	'keywords:': [1]
 },
 {
 	'id': 4,
 	'title': 'Article4',
-	'author': 'Author1',
+	'authors': [1],
 	'abstrac': 'This is an abstract act act act',
-	'detail': 'Goddamn!'
-}]
+	'year': 2007,
+	'periodic': 'a',
+	'keywords:': [1,2]
+}];

@@ -22,8 +22,10 @@ script(id!="search/adv",type="text/x-handlebars")
 	form.form-horizontal(method="post", name="adv-search")
 		mixin horizontal-input("title", "Título")
 		mixin horizontal-input("author", "Autor")
-		mixin horizontal-input("periodic", "Periódico")
+		mixin horizontal-input("periodic", "Periódico/Instituição")
 		mixin horizontal-input("year", "Ano de Publicação")
+		mixin horizontal-input("keyword", "Palavras-chave")
+		mixin horizontal-input("capes", "Classificação CAPES")	
 		div
 			input.btn.btn-primary(type="submit", value="Buscar")
 			button.btn.btn-info.
