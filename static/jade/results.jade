@@ -1,4 +1,4 @@
-script#articles(type="text/x-handlebars")
+script#results(type="text/x-handlebars")
 	div.row-fluid
 		| {{outlet upperSearch}}
 	div.row-fluid
@@ -17,7 +17,7 @@ script#article-list(type="text/x-handlebars")
 
 			span {{author}}
 			p {{abstrac}}
-			|{{#linkTo 'articles.info' this}}Detalhes{{/linkTo}}
+			|{{#linkTo 'results.info' this}}Detalhes{{/linkTo}}
 			hr
 		| {{/each}}		
 		

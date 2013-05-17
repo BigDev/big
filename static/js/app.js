@@ -4,7 +4,7 @@ Big.Router.map(function() {
 	this.resource('search', function() {
 		this.route('adv');
 	});
-	this.resource('articles', function() {
+	this.resource('results', function() {
 		this.route('info', {path: 'info/:article_id'});
 	});
 	this.resource('article', {path: 'article/:article_id'});
@@ -16,11 +16,11 @@ Big.IndexRoute = Ember.Route.extend({
 	}
 });
 
-Big.ArticlesRoute = Ember.Route.extend({
+Big.ResultsRoute = Ember.Route.extend({
 	renderTemplate: function() {
 		this.render();
-		this.render('upper-search', {into: 'articles', outlet: 'upperSearch'});
-		this.render('article-list', {into: 'articles', outlet: 'articleList'});
+		this.render('upper-search', {into: 'results', outlet: 'upperSearch'});
+		this.render('article-list', {into: 'results', outlet: 'articleList'});
 	},
 	model: function() {
 		return Big.Article.find();
@@ -36,9 +36,9 @@ Big.ArticleRoute = Ember.Route.extend({
 	}
 });
 
-Big.ArticlesInfoRoute = Ember.Route.extend({
+Big.ResultsInfoRoute = Ember.Route.extend({
 	renderTemplate: function() {
-		this.render('article-info', {into: 'articles', outlet: 'articleInfo'});
+		this.render('article-info', {into: 'results', outlet: 'articleInfo'});
 	}
 });
 
