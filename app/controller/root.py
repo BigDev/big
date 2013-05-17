@@ -1,13 +1,14 @@
 
 import cherrypy
+from app.controller.article import Article
 
 class Root(object):
 	exposed = True
 
-        @cherrypy.tools.mako(filename="index.html")
-	def GET(self, text = 'hello world'):
-		return {'bla': text}
+	article = Article()
 
-	def POST(self):
-		return 'ola'
+        @cherrypy.tools.mako(filename="index.html")
+	def GET(self):
+		text = 'hello world'
+		return {'bla': text}
 
