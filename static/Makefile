@@ -1,20 +1,20 @@
 CC= jade
-OBJS= index.html
 JDFLAGS = 
 PRODCSS = css
 LESSD = less
+JADEDIR = jade
 
-.PHONY: all debug setdbg clean less
+.PHONY: jade all debug setdbg clean less
 
-all: $(OBJS) less
+all: jade less
 debug: setdbg |  all
 setdbg:
 	$(eval JDFLAGS+=--pretty)
 clean:
 	rm *.html
 
-%.html:%.jade
-	$(CC) $(JDFLAGS) < $< --path $< > $@
+jade: $(wildcard $(JADEDIR)/*.jade)
+	$(CC) $(JDFLAGS) < $(JADEDIR)/index.jade --path $(JADEDIR)/index.jade > index.html
 
 less: $(LESSD)/search.less $(LESSD)/big.less
 	lessc -x --yui-compress $(LESSD)/big.less > $(PRODCSS)/big.min.css
