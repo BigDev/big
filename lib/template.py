@@ -1,7 +1,6 @@
 import cherrypy
 from mako.lookup import TemplateLookup
 
-
 class MakoHandler(cherrypy.dispatch.LateParamPageHandler):
     """Callable which sets response.body."""
     

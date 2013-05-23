@@ -32,12 +32,16 @@ class Server(object):
         # the application's modules.
         sys.path.insert(0, self.base_dir)
 
-	from lib.template import MakoLoader
-	cherrypy.tools.mako = cherrypy.Tool('on_start_resource', MakoLoader())
+        from lib.template import MakoLoader
+        cherrypy.tools.mako = cherrypy.Tool('on_start_resource', MakoLoader())
+
+        from lib.BackgroundTaskQueue import BackgroundTaskQueue
+        cherrypy.tools.bgtask = BackgroundTaskQueue(cherrypy.engine)
+        cherrypy.tools.bgtask.subscribe()
 
          # Let's mount the application so that CherryPy can serve it
-	from app.controller.root import Root
-	webapp = Root()
+        from app.controller.root import Root
+        webapp = Root()
         app = cherrypy.tree.mount(webapp, '/', os.path.join(self.conf_path, "app.cfg"))
         self.make_rotate_logs(app)
      
