@@ -1,0 +1,26 @@
+script#results(type="text/x-handlebars")
+	div.row-fluid
+		| {{outlet upperSearch}}
+	div#results.row-fluid
+		hr
+		div.span7.
+			{{outlet articleList}}
+		div.span4.
+			{{outlet articleInfo}}
+
+script#article-list(type="text/x-handlebars")
+	ul.article-list
+		| {{#each model}}
+		li
+			|{{#linkTo 'article' this}}
+			h3 {{title}}
+			|{{/linkTo}}
+
+			span.
+				{{year}}
+				{{#each author in authors}}
+					, {{author.name}}
+				{{/each}}
+			{{#linkTo 'results.info' this}}Detalhes{{/linkTo}}
+		| {{/each}}		
+		
