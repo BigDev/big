@@ -24,6 +24,18 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: article_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE article_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
 SET default_with_oids = false;
 
 --
@@ -31,7 +43,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE "Article" (
-    "PK_Article" bigint NOT NULL,
+    "PK_Article" bigint DEFAULT nextval('article_seq'::regclass) NOT NULL,
     "FK_CapesRating" bigint NOT NULL,
     "FK_Institution" bigint NOT NULL,
     "Title" character varying(200) NOT NULL,
@@ -63,13 +75,37 @@ CREATE TABLE "ArticleKeyword" (
 
 
 --
+-- Name: author_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE author_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: Author; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE "Author" (
-    "PK_Author" integer NOT NULL,
+    "PK_Author" integer DEFAULT nextval('author_seq'::regclass) NOT NULL,
     "Name" character varying(50) NOT NULL
 );
+
+
+--
+-- Name: capesrating_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE capesrating_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -77,9 +113,21 @@ CREATE TABLE "Author" (
 --
 
 CREATE TABLE "CapesRating" (
-    "PK_Rate" integer NOT NULL,
+    "PK_CapesRating" integer DEFAULT nextval('capesrating_seq'::regclass) NOT NULL,
     "Name" character varying(50) NOT NULL
 );
+
+
+--
+-- Name: institution_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE institution_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -87,9 +135,21 @@ CREATE TABLE "CapesRating" (
 --
 
 CREATE TABLE "Institution" (
-    "PK_Institution" integer NOT NULL,
+    "PK_Institution" integer DEFAULT nextval('institution_seq'::regclass) NOT NULL,
     "Name" character varying(50) NOT NULL
 );
+
+
+--
+-- Name: keyword_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE keyword_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -97,9 +157,21 @@ CREATE TABLE "Institution" (
 --
 
 CREATE TABLE "Keyword" (
-    "PK_Keyword" integer NOT NULL,
+    "PK_Keyword" integer DEFAULT nextval('keyword_seq'::regclass) NOT NULL,
     "Name" character varying(50) NOT NULL
 );
+
+
+--
+-- Name: user_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -107,7 +179,7 @@ CREATE TABLE "Keyword" (
 --
 
 CREATE TABLE "User" (
-    "PK_User" bigint NOT NULL,
+    "PK_User" bigint DEFAULT nextval('user_seq'::regclass) NOT NULL,
     "Login" character varying(30) NOT NULL,
     "PasswordSHA1" character varying(40) NOT NULL
 );
@@ -150,7 +222,7 @@ ALTER TABLE ONLY "Author"
 --
 
 ALTER TABLE ONLY "CapesRating"
-    ADD CONSTRAINT "PK_CapesRating" PRIMARY KEY ("PK_Rate");
+    ADD CONSTRAINT "PK_CapesRating" PRIMARY KEY ("PK_CapesRating");
 
 
 --
@@ -254,7 +326,7 @@ ALTER TABLE ONLY "ArticleKeyword"
 --
 
 ALTER TABLE ONLY "Article"
-    ADD CONSTRAINT "FK_Article_CapesRating" FOREIGN KEY ("FK_CapesRating") REFERENCES "CapesRating"("PK_Rate") ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT "FK_Article_CapesRating" FOREIGN KEY ("FK_CapesRating") REFERENCES "CapesRating"("PK_CapesRating") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

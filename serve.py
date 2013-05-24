@@ -32,6 +32,9 @@ class Server(object):
         # the application's modules.
         sys.path.insert(0, self.base_dir)
 
+        from pony.orm import Database
+        cherrypy.tools.db = Database('postgres', 'host=localhost port=5432 dbname=big user=postgres password=postgres')
+
         from app.lib.template import MakoLoader
         cherrypy.tools.mako = cherrypy.Tool('on_start_resource', MakoLoader())
 
