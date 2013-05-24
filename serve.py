@@ -32,10 +32,10 @@ class Server(object):
         # the application's modules.
         sys.path.insert(0, self.base_dir)
 
-        from lib.template import MakoLoader
+        from app.lib.template import MakoLoader
         cherrypy.tools.mako = cherrypy.Tool('on_start_resource', MakoLoader())
 
-        from lib.BackgroundTaskQueue import BackgroundTaskQueue
+        from app.lib.BackgroundTaskQueue import BackgroundTaskQueue
         cherrypy.tools.bgtask = BackgroundTaskQueue(cherrypy.engine)
         cherrypy.tools.bgtask.subscribe()
 
