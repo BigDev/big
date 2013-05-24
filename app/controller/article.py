@@ -6,9 +6,8 @@ import solr
 class Article(object):
 	exposed = True
 
-        @cherrypy.tools.mako(filename="index.html")
-	def GET(self, text = 'hello world 2'):
-		return {'bla': text}
+	def GET(self):
+		pass
 
 	def POST(self, author=None, title=None, abstract=None, classification=None, institution=None, keywords=None, year=None, filepdf=None):
 
