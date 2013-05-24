@@ -34,13 +34,31 @@ CREATE TABLE "Article" (
     "PK_Article" bigint NOT NULL,
     "FK_CapesRating" bigint NOT NULL,
     "FK_Institution" bigint NOT NULL,
-    "FK_Author" bigint NOT NULL,
-    "FK_Keyword" bigint NOT NULL,
     "Title" character varying(200) NOT NULL,
     "Abstract" text NOT NULL,
     "Year" smallint NOT NULL,
     "Views" integer DEFAULT 0 NOT NULL,
     "IndexDate" date
+);
+
+
+--
+-- Name: ArticleAuthor; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "ArticleAuthor" (
+    "FK_Article" bigint NOT NULL,
+    "FK_Author" bigint NOT NULL
+);
+
+
+--
+-- Name: ArticleKeyword; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "ArticleKeyword" (
+    "FK_Article" bigint NOT NULL,
+    "FK_Keyword" bigint NOT NULL
 );
 
 
@@ -104,6 +122,22 @@ ALTER TABLE ONLY "Article"
 
 
 --
+-- Name: PK_ArticleAuthor; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "ArticleAuthor"
+    ADD CONSTRAINT "PK_ArticleAuthor" PRIMARY KEY ("FK_Article", "FK_Author");
+
+
+--
+-- Name: PK_ArticleKeyword; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "ArticleKeyword"
+    ADD CONSTRAINT "PK_ArticleKeyword" PRIMARY KEY ("FK_Article", "FK_Keyword");
+
+
+--
 -- Name: PK_Author; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -141,14 +175,6 @@ ALTER TABLE ONLY "Keyword"
 
 ALTER TABLE ONLY "User"
     ADD CONSTRAINT "PK_User" PRIMARY KEY ("PK_User");
-
-
---
--- Name: Unique_Article_TitleAuthor; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY "Article"
-    ADD CONSTRAINT "Unique_Article_TitleAuthor" UNIQUE ("Title", "FK_Author");
 
 
 --
@@ -192,11 +218,35 @@ ALTER TABLE ONLY "User"
 
 
 --
--- Name: FK_Article_Author; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: FK_ArticleAuthor_Article; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY "Article"
-    ADD CONSTRAINT "FK_Article_Author" FOREIGN KEY ("FK_Author") REFERENCES "Author"("PK_Author") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY "ArticleAuthor"
+    ADD CONSTRAINT "FK_ArticleAuthor_Article" FOREIGN KEY ("FK_Article") REFERENCES "Article"("PK_Article") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: FK_ArticleAuthor_Author; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "ArticleAuthor"
+    ADD CONSTRAINT "FK_ArticleAuthor_Author" FOREIGN KEY ("FK_Author") REFERENCES "Author"("PK_Author") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: FK_ArticleKeyword_Article; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "ArticleKeyword"
+    ADD CONSTRAINT "FK_ArticleKeyword_Article" FOREIGN KEY ("FK_Article") REFERENCES "Article"("PK_Article") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: FK_ArticleKeyword_Keyword; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "ArticleKeyword"
+    ADD CONSTRAINT "FK_ArticleKeyword_Keyword" FOREIGN KEY ("FK_Keyword") REFERENCES "Keyword"("PK_Keyword") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -213,14 +263,6 @@ ALTER TABLE ONLY "Article"
 
 ALTER TABLE ONLY "Article"
     ADD CONSTRAINT "FK_Article_Institution" FOREIGN KEY ("FK_Institution") REFERENCES "Institution"("PK_Institution") ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: FK_Article_Keyword; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY "Article"
-    ADD CONSTRAINT "FK_Article_Keyword" FOREIGN KEY ("FK_Keyword") REFERENCES "Keyword"("PK_Keyword") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
