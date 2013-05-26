@@ -19,14 +19,14 @@ class Article(object):
 
 		doc = [{
 				'id':id,
-				'author':author,
-				'title':title,
-				'abstract':abstract,
-				'classification':classification,
-				'institution':institution,
-				'keywords':keywords,
-				'year':year,
-				'filename':filepdf.filename,
+				'author':{'set':author},
+				'title':{'set':title},
+				'abstract':{'set':abstract},
+				'classification':{'set':classification},
+				'institution':{'set':institution},
+				'keywords':{'set':keywords},
+				'year':{'set':year},
+				'filename':{'set':filepdf.filename},
 
 		}]
 		r = requests.post('%s?commit=true' % url, data=json.dumps(doc), headers={'content-type':'application/json'})

@@ -11,7 +11,7 @@ class Search(object):
 		if q == None:
 			return ''
 
-		params = '?q=%s' % q.replace(' ','+')
+		params = '?fl=id,author,title,filename,classification,keywords,abstract,year,institution&q=%s' % q.replace(' ','+')
 		url = 'http://localhost:8983/solr/collection1/query' + params
 
 		try:
