@@ -1,5 +1,5 @@
 import cherrypy
-import httplib2
+import requests
 import solr
 import json
 
@@ -15,10 +15,10 @@ class Search(object):
 		url = 'http://localhost:8983/solr/collection1/query' + params
 
 		try:
-			resp, content = httplib2.Http().request(url, 'GET')
+			r = requests.get(url)
 		except:
 			# TODO: log
 			raise cherrypy.HTTPRedirect("/error")
 
-		return content
+		return r.content
 

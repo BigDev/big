@@ -1511,8 +1511,9 @@
        a search component that enables you to configure the top
        results for a given query regardless of the normal lucene
        scoring.
+    -->
   <searchComponent name="elevator" class="solr.QueryElevationComponent" >
-    <str name="queryFieldType">uuid</str>
+    <str name="queryFieldType">string</str>
     <str name="config-file">elevate.xml</str>
   </searchComponent>
 
@@ -1525,7 +1526,6 @@
       <str>elevator</str>
     </arr>
   </requestHandler>
-    -->
 
   <!-- Highlighting Component
 
