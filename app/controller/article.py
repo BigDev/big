@@ -1,26 +1,41 @@
 import os
 import cherrypy
+import requests
+import json
 
-import solr
+# http://localhost:8983/solr/update?stream.body=%3Cdelete%3E%3Cquery%3E*:*%3C/query%3E%3C/delete%3E&commit=true
 
 class Article(object):
 	exposed = True
 
-        @cherrypy.tools.mako(filename="index.html")
-	def GET(self, text = 'hello world 2'):
-		return {'bla': text}
+	def GET(self):
+		pass
 
-	def POST(self, author=None, title=None, abstract=None, classification=None, institution=None, keywords=None, year=None, filepdf=None):
+	def POST(self, id, author=None, title=None, abstract=None, classification=None, institution=None, keywords=None, year=None, filepdf=None):
 
-#		con = solr.SolrConnection('http://localhost:8983/solr')
-#		con.add(id=2,author=author, title=title, capes=classification, institution=institution, keywords=keywords, year=year)
-#		con.commit()
+		url = 'http://localhost:8983/solr/update'
 
-		id = 1
-		dir = os.path.join(os.getcwd(), 'static/data')
-		filename = dir + '/a%s.pdf' % id
-		fOut = open(filename, 'w')
+		r = requests.post('%s/extract?literal.id=%s&commit=true' % (url, id), files={filepdf.filename:filepdf.file})
 
+		doc = [{
+				'id':id,
+				'author':{'set':author},
+				'title':{'set':title},
+				'abstract':{'set':abstract},
+				'classification':{'set':classification},
+				'institution':{'set':institution},
+				'keywords':{'set':keywords},
+				'year':{'set':year},
+				'filename':{'set':filepdf.filename},
+
+		}]
+		r = requests.post('%s?commit=true' % url, data=json.dumps(doc), headers={'content-type':'application/json'})
+
+		fdir = os.path.join(os.getcwd(), 'static/data')
+		fname = fdir + '/%s' % filepdf.filename
+		fOut = open(fname, 'w')
+
+		filepdf.file.seek(0)
 		while True:
 			data = filepdf.file.read(8192)
 			if not data:
@@ -29,5 +44,5 @@ class Article(object):
 
 		fOut.close()
 
-		return '%s - %s - %s - %s - %s - %s - %s - %s' % (author, title, abstract, classification, institution, keywords, year, filepdf.fp)
+		return '%s - %s - %s - %s - %s - %s - %s - %s' % (author, title, abstract, classification, institution, keywords, year, filepdf.filename)
 
