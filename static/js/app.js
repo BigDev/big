@@ -83,7 +83,7 @@ Big.Article = DS.Model.extend({
 	keywords: DS.hasMany('Big.Keyword')
 });
 
-Big.Author.FIXTURE = [{
+Big.Author.FIXTURES = [{
 	'id': 1,
 	'name': 'Author1'
 },
@@ -92,7 +92,7 @@ Big.Author.FIXTURE = [{
 	'name': 'Author2'
 }];
 
-Big.Keyword.FIXTURE = [{
+Big.Keyword.FIXTURES = [{
 	'id': 1,
 	'word': 'word1'
 },
@@ -108,7 +108,7 @@ Big.Article.FIXTURES = [{
 	'abstrac': 'This is an abstract act act act',
 	'year': 2007,
 	'periodic': 'a',
-	'keywords:': [1]
+	'keywords': [1]
 },
 {
 	'id': 2,
@@ -117,7 +117,7 @@ Big.Article.FIXTURES = [{
 	'abstrac': 'This is an abstract act act act',
 	'year': 2007,
 	'periodic': 'a',
-	'keywords:': [1]
+	'keywords': [1]
 },
 {
 	'id': 3,
@@ -126,7 +126,7 @@ Big.Article.FIXTURES = [{
 	'abstrac': 'This is an abstract act act act',
 	'year': 2007,
 	'periodic': 'a',
-	'keywords:': [1]
+	'keywords': [1]
 },
 {
 	'id': 4,
@@ -135,5 +135,5 @@ Big.Article.FIXTURES = [{
 	'abstrac': 'This is an abstract act act act',
 	'year': 2007,
 	'periodic': 'a',
-	'keywords:': [1,2]
+	'keywords': [1,2]
 }];

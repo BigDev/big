@@ -18,7 +18,7 @@ script#article-list(type="text/x-handlebars")
 
 			span.
 				{{year}}
-				{{#each author in this.authors}}
+				{{#each author in authors}}
 					, {{author.name}}
 				{{/each}}
 			{{#linkTo 'results.info' this}}Detalhes{{/linkTo}}
