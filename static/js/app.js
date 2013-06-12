@@ -59,11 +59,43 @@ Big.SearchView = Ember.View.extend({
 
 Big.Article = Ember.Object.extend();
 
+Big.SearchController = Ember.Controller.extend({
+	searchUrlPrefix: 'http://localhost:8000/api/search',
+
+	buildUrl: function(querystring) {
+		return this.searchUrlPrefix+
+			'?q="'+querystring+'"';
+	},	
+
+	makeSearch: function(querystring) {
+		//return $.ajax({
+		//	url: this.buildUrl(querystring) 
+		//});
+	}
+});
+
 Big.SearchIndexController = Ember.Controller.extend({
+	needs: 'search',
+	querystr: '',	
+
 	query: function() {
+		console.log("query: "+this.get('querystr'));
+		this.get('controllers.search').makeSearch(this.get('querystr'));
 		this.transitionToRoute('results.index');
 	}
 });
+
+Big.SearchAdvController = Ember.Controller.extend({
+	needs: 'search',
+	querystr: '',	
+
+	query: function() {
+		console.log("query: "+this.querystr);
+		this.get('controllers.search').makeSearch(this.querystr);
+		this.transitionToRoute('results.index');
+	}
+});
+
 
 Big.ResultsController = Ember.Controller.extend({
 

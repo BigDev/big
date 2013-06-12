@@ -12,9 +12,9 @@ script#search(type="text/x-handlebars")
 		
 script(id!="search/index",type="text/x-handlebars")
 	form(method="post", name="search")
-		input.input-block-level(type="text", name="query")
+		|<input class="input-block-level" type="text" name="query" {{bindAttr value="querystr"}} />
 		div
-			|<button {{action query}}>Buscar</button>
+			|<button class="btn btn-primary" {{action query}}>Buscar</button>
 			button.btn.btn-info.
 				{{#linkTo 'search.adv'}}Busca avançada{{/linkTo}}
 		
@@ -27,7 +27,7 @@ script(id!="search/adv",type="text/x-handlebars")
 		mixin horizontal-input("keyword", "Palavras-chave")
 		mixin horizontal-input("capes", "Classificação CAPES")	
 		div
-			input.btn.btn-primary(type="submit", value="Buscar")
+			|<button class="btn btn-primary" {{action query}}>Buscar</button>
 			button.btn.btn-info.
 				{{#linkTo 'search.index'}}Busca simples{{/linkTo}}
 
