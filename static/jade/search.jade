@@ -14,7 +14,7 @@ script(id!="search/index",type="text/x-handlebars")
 	form(method="post", name="search")
 		input.input-block-level(type="text", name="query")
 		div
-			input.btn.btn-primary(type="submit", value="Buscar")
+			|<button {{action query}}>Buscar</button>
 			button.btn.btn-info.
 				{{#linkTo 'search.adv'}}Busca avançada{{/linkTo}}
 		

@@ -10,17 +10,5 @@ script#results(type="text/x-handlebars")
 
 script#article-list(type="text/x-handlebars")
 	ul.article-list
-		| {{#each model}}
-		li
-			|{{#linkTo 'article' this}}
-			h3 {{title}}
-			|{{/linkTo}}
-
-			span.
-				{{year}}
-				{{#each author in authors}}
-					, {{author.name}}
-				{{/each}}
-			{{#linkTo 'results.info' this}}Detalhes{{/linkTo}}
-		| {{/each}}		
-		
+		li Test
+		li Test2	

@@ -21,9 +21,6 @@ Big.ResultsRoute = Ember.Route.extend({
 		this.render();
 		this.render('upper-search', {into: 'results', outlet: 'upperSearch'});
 		this.render('article-list', {into: 'results', outlet: 'articleList'});
-	},
-	model: function() {
-		return Big.Article.find();
 	}
 });
 
@@ -60,80 +57,14 @@ Big.SearchView = Ember.View.extend({
 	}
 });
 
-Big.Store = DS.Store.extend({
-	revision: 12,
-	adapter: 'DS.FixtureAdapter'
+Big.Article = Ember.Object.extend();
+
+Big.SearchIndexController = Ember.Controller.extend({
+	query: function() {
+		this.transitionToRoute('results.index');
+	}
 });
 
-Big.Author = DS.Model.extend({
-	name: DS.attr('string')
+Big.ResultsController = Ember.Controller.extend({
+
 });
-
-Big.Keyword = DS.Model.extend({
-	word: DS.attr('string')
-});
-
-Big.Article = DS.Model.extend({
-	title: DS.attr('string'),
-	authors: DS.hasMany('Big.Author'),
-	abstrac: DS.attr('string'),
-	year: DS.attr('number'),
-	capes: DS.attr('string'),
-	periodic: DS.attr('string'),
-	keywords: DS.hasMany('Big.Keyword')
-});
-
-Big.Author.FIXTURES = [{
-	'id': 1,
-	'name': 'Author1'
-},
-{
-	'id': 2,
-	'name': 'Author2'
-}];
-
-Big.Keyword.FIXTURES = [{
-	'id': 1,
-	'word': 'word1'
-},
-{
-	'id': 2,
-	'word': 'word2'
-}];
-
-Big.Article.FIXTURES = [{
-	'id': 1,
-	'title': 'Article1',
-	'authors': [1],
-	'abstrac': 'This is an abstract act act act',
-	'year': 2007,
-	'periodic': 'a',
-	'keywords': [1]
-},
-{
-	'id': 2,
-	'title': 'Article2',
-	'authors': [1,2],
-	'abstrac': 'This is an abstract act act act',
-	'year': 2007,
-	'periodic': 'a',
-	'keywords': [1]
-},
-{
-	'id': 3,
-	'title': 'Article3',
-	'authors': [2],
-	'abstrac': 'This is an abstract act act act',
-	'year': 2007,
-	'periodic': 'a',
-	'keywords': [1]
-},
-{
-	'id': 4,
-	'title': 'Article4',
-	'authors': [1],
-	'abstrac': 'This is an abstract act act act',
-	'year': 2007,
-	'periodic': 'a',
-	'keywords': [1,2]
-}];
