@@ -6,12 +6,12 @@ import json
 class Search(object):
 	exposed = True
 
-	def GET(self, q = None):
+	def GET(self, q = None, fl = "id,author,title,filename,classification,keywords,abstract,year,institution"):
 
 		if q == None:
 			return ''
 
-		params = '?fl=id,author,title,filename,classification,keywords,abstract,year,institution&q=%s' % q.replace(' ','+')
+		params = '?q=%s&fl=%s' % (q.replace(' ','+'), fl)
 		url = 'http://localhost:8983/solr/collection1/query' + params
 
 		try:
