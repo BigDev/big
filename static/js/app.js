@@ -84,6 +84,7 @@ Big.SearchIndexController = Ember.Controller.extend({
 		console.log(querystr);
 		this.get('controllers.search').makeSearch(this.get('querystr'));
 //		this.transitionToRoute('results.index');
+		return false;
 	}
 });
 
