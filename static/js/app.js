@@ -83,6 +83,9 @@ Big.SearchIndexController = Ember.Controller.extend({
 	query: function() {
 		var querystr = document.forms["search"].elements["query"].value;
 		console.log(querystr);
+		querystr = $.trim(querystr);
+		if (!querystr)
+			return false;
 		this.get('controllers.search').makeSearch(querystr);
 	}
 });
