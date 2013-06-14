@@ -12,7 +12,7 @@ script#search(type="text/x-handlebars")
 		
 script(id!="search/index",type="text/x-handlebars")
 	form(method="post", name="search")
-		|<input class="input-block-level" type="text" name="query" {{bindAttr value="querystr"}} />
+		input.input-block-level(type="text", name="query")
 		div
 			|<button class="btn btn-primary" {{action query}}>Buscar</button>
 			button.btn.btn-info.
