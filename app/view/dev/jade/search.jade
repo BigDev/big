@@ -1,0 +1,34 @@
+mixin horizontal-input(inputName, inputLabel)
+	div.control-group
+		label.control-label(for=inputName)= inputLabel
+		div.controls
+			input(type="text", name=inputName)
+		
+script#search(type="text/x-handlebars")
+	div.row-fluid
+		div#search-div.span4.offset4
+			h1 BIG Busca
+			| {{outlet}}
+		
+script(id!="search/index",type="text/x-handlebars")
+	form(method="post", name="search")
+		input.input-block-level(type="text", name="query")
+		div
+			|<button class="btn btn-primary" {{action query}}>Buscar</button>
+			button.btn.btn-info.
+				{{#linkTo 'search.adv'}}Busca avan&ccedil;ada{{/linkTo}}
+		
+script(id!="search/adv",type="text/x-handlebars")
+	form.form-horizontal(method="post", name="adv-search")
+		mixin horizontal-input("title", "T&iacute;tulo")
+		mixin horizontal-input("author", "Autor")
+		mixin horizontal-input("periodic", "Peri&oacute;dico/Institui&ccedil;&atilde;o")
+		mixin horizontal-input("year", "Ano de Publica&ccedil;&atilde;o")
+		mixin horizontal-input("keyword", "Palavras-chave")
+		mixin horizontal-input("capes", "Classifica&ccedil;&atilde;o CAPES")	
+		div
+			|<button class="btn btn-primary" {{action query}}>Buscar</button>
+			button.btn.btn-info.
+				{{#linkTo 'search.index'}}Busca simples{{/linkTo}}
+
+

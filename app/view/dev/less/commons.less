@@ -1,0 +1,24 @@
+@upper-bar-w: 10%;
+@padding-top-bottom: 1%;
+@margin-button: 1%;
+
+#upper-bar {
+	height: @upper-bar-w;
+	padding-top: @padding-top-bottom;
+	padding-bottom: @padding-top-bottom;
+	
+	h1 {
+		display: inline;
+		margin: 0;
+	}
+
+	form {
+		display: inline;
+		position: relative;
+		line-height: 40px;
+
+		input[type="submit"] {
+			margin-left: @margin-button;
+		}	
+	}
+}
