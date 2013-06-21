@@ -1,13 +1,16 @@
 CC= jade
 JDFLAGS = 
-PRODCSS = ../../../static/css
+STATICD = ../../../static
+PRODCSS = $(STATICD)/css
+PRODJS = $(STATICD)/js
 PRODHTML = ..
 LESSD = less
 JADEDIR = jade
+JSDIR = js
 
-.PHONY: jade all debug setdbg clean less
+.PHONY: jade all debug setdbg clean less js
 
-all: jade less
+all: jade less js
 debug: setdbg |  all
 setdbg:
 	$(eval JDFLAGS+=--pretty)
@@ -19,3 +22,6 @@ jade: $(wildcard $(JADEDIR)/*.jade)
 
 less: $(LESSD)/search.less $(LESSD)/big.less
 	lessc -x --yui-compress $(LESSD)/big.less > $(PRODCSS)/big.min.css
+
+js: $(wildcard $(JSDIR)/*.js)
+	cat $^ > $(PRODJS)/app.js

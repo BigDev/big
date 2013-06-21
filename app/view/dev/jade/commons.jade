@@ -5,8 +5,8 @@ script#upper-search(type="text/x-handlebars")
 		form.form-inline(method="post", name="search")
 			div.span4.offset1
 				input.input-block-level(type="text", name="query")
-			div.span1
-				input.btn.btn-primary(type="submit", value="Buscar")
-		
+			div.span1.
+				<input class="btn btn-primary" value="Buscar" type="button" {{action query}} />
+	
 script#article-info(type="text/x-handlebars")
 	h1 {{title}}
