@@ -76,9 +76,11 @@ Big.SearchController = Ember.Controller.extend({
 		var me = this;
 
 		$.ajax({
-			url: this.buildUrl(querystring)
+			url: this.buildUrl(querystring),
+			dataType: 'json'
 		}).done(function(data) {
-			me.get('controllers.results').getData(data);
+			console.log(data);
+			me.get('controllers.results').getData(data.response.docs);
 		});
 		this.transitionToRoute('results.index');
 	}
@@ -109,7 +111,7 @@ Big.SearchAdvController = Ember.Controller.extend({
 Big.ResultsController = Ember.ArrayController.extend({
 	getData: function(data) {
 		console.log(data);
-//		this.set('content', data);
+		this.set('content', data);
 	}
 });
 
