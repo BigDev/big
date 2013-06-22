@@ -85,11 +85,34 @@ Big.ResultsController = Ember.ArrayController.extend({
 	}
 });
 
-Big.UploadController = Ember.Controller.extend({
-	formatData: function() {
-		var obj={};
+function createHidden(inputName, inputValue) {
+	var el = document.createElement('input');
+	el.type="hidden";
+	el.name=inputName;
+	el.value=inputValue;
+	return el;
+}
 
-		
+function multipleValues(inputName, formName) {
+	var form = document.forms[formName];
+	var field = form.elements[inputName];
+
+	var arr = field.value.split(",");
+	if (arr.length==0) return; 
+
+	field.value = escape($.trim(arr[0]));
+	
+	for (var i=1; i<arr.length; i++)
+		form.appendChild(createHidden(
+			field.name,	
+			escape($.trim(arr[i]))
+		));
+}
+
+Big.UploadView = Ember.View.extend({
+	submit: function() {
+		multipleValues("author", "upload");
+		multipleValues("keywords", "upload");
 	}
 });
 Big.SearchController = Ember.Controller.extend({

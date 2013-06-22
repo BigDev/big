@@ -1,3 +1,9 @@
+mixin horizontal-file(inputName, inputLabel)
+	div.control-group
+		label.control-label(for=inputName)= inputLabel
+		div.controls
+			input(type="file", name=inputName, accept="application/pdf")
+
 mixin horizontal-input(inputName, inputLabel)
 	div.control-group
 		label.control-label(for=inputName)= inputLabel
@@ -9,7 +15,7 @@ mixin horizontal-textarea(inputName, inputLabel)
 		label.control-label(for=inputName)= inputLabel
 		div.controls
 			textarea(name=inputName)
-		
+	
 script#upper-search(type="text/x-handlebars")
 	div#upper-bar.span12
 		div.span2
