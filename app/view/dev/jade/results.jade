@@ -10,5 +10,8 @@ script#results(type="text/x-handlebars")
 
 script#article-list(type="text/x-handlebars")
 	ul.article-list
-		li Test
-		li Test2	
+		| {{#each controller}}
+		li {{title}}
+		| {{else}}
+		| Nenhum resultado para sua busca
+		| {{/each}}	
