@@ -11,7 +11,10 @@ script#results(type="text/x-handlebars")
 script#article-list(type="text/x-handlebars")
 	ul.article-list
 		| {{#each controller}}
-		li {{title}}
+		li
+			h2 {{title}}
+			p {{abstract}}
+			| {{institution}}/{{periodic}} ({{classification}})
 		| {{else}}
-		| Nenhum resultado para sua busca
+		| Nenhum resultado para sua busca //Needs some CSS magic!
 		| {{/each}}	
