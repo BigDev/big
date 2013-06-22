@@ -64,7 +64,7 @@ Big.ResultsController = Ember.ArrayController.extend({
 	defaultPath: 'data/',
 
 	getData: function(data) {
-		this.set('content', []);
+		this.clear();
 
 		for (var i=0; i<data.length; i++) {
 			var newObj = Ember.Object.create({
@@ -82,5 +82,13 @@ Big.ResultsController = Ember.ArrayController.extend({
 			
 			this.pushObject(newObj);
 		}
+	}
+});
+
+Big.UploadController = Ember.Controller.extend({
+	formatData: function() {
+		var obj={};
+
+		
 	}
 });
