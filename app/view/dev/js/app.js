@@ -63,6 +63,7 @@ Big.Article = Ember.Object.extend();
 
 Big.SearchController = Ember.Controller.extend({
 	searchUrlPrefix: 'api/search',
+	needs: 'results',
 	querystr: '',
 
 	buildUrl: function(querystring) {
@@ -72,8 +73,12 @@ Big.SearchController = Ember.Controller.extend({
 
 	makeSearch: function(querystring) {
 		this.set('querystr', querystring);
+		var me = this;
+
 		$.ajax({
-			url: this.buildUrl(querystring) 
+			url: this.buildUrl(querystring)
+		}).done(function(data) {
+			me.get('controllers.results').getData(data);
 		});
 		this.transitionToRoute('results.index');
 	}
@@ -101,7 +106,11 @@ Big.SearchAdvController = Ember.Controller.extend({
 	}
 });
 
-
-Big.ResultsController = Ember.Controller.extend({
-
+Big.ResultsController = Ember.ArrayController.extend({
+	getData: function(data) {
+		console.log(data);
+//		this.set('content', data);
+	}
 });
+
+

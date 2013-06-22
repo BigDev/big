@@ -11,7 +11,7 @@ script#search(type="text/x-handlebars")
 			| {{outlet}}
 		
 script(id!="search/index",type="text/x-handlebars")
-	form(method="post", name="search")
+	form(name="search")
 		input.input-block-level(type="text", name="query")
 		div
 			|<button class="btn btn-primary" {{action query}}>Buscar</button>
@@ -19,7 +19,7 @@ script(id!="search/index",type="text/x-handlebars")
 				{{#linkTo 'search.adv'}}Busca avan&ccedil;ada{{/linkTo}}
 		
 script(id!="search/adv",type="text/x-handlebars")
-	form.form-horizontal(method="post", name="adv-search")
+	form.form-horizontal(name="adv-search")
 		mixin horizontal-input("title", "T&iacute;tulo")
 		mixin horizontal-input("author", "Autor")
 		mixin horizontal-input("periodic", "Peri&oacute;dico/Institui&ccedil;&atilde;o")
