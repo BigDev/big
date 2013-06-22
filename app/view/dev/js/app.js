@@ -8,6 +8,7 @@ Big.Router.map(function() {
 		this.route('info', {path: 'info/:article_id'});
 	});
 	this.resource('article', {path: 'article/:article_id'});
+	this.route('upload');
 });
 
 Big.IndexRoute = Ember.Route.extend({
@@ -59,71 +60,27 @@ Big.SearchView = Ember.View.extend({
 	}
 });
 
-Big.Article = Ember.Object.extend();
-
-Big.SearchController = Ember.Controller.extend({
-	searchUrlPrefix: 'api/search',
-	needs: 'results',
-	querystr: '',
-
-	buildUrl: function(querystring) {
-		return this.searchUrlPrefix+
-			'?q='+querystring;
-	},	
-
-	makeSearch: function(querystring) {
-		this.set('querystr', querystring);
-		var me = this;
-
-		$.ajax({
-			url: this.buildUrl(querystring),
-			dataType: 'json'
-		}).done(function(data) {
-			me.get('controllers.results').getData(data.response.docs);
-		});
-		this.transitionToRoute('results.index');
-	}
-});
-
-Big.SearchIndexController = Ember.Controller.extend({
-	needs: 'search',
-
-	query: function() {
-		var querystr = document.forms["search"].elements["query"].value;
-		console.log(querystr);
-		querystr = $.trim(querystr);
-		if (!querystr)
-			return false;
-		this.get('controllers.search').makeSearch(querystr);
-	}
-});
-
-Big.SearchAdvController = Ember.Controller.extend({
-	needs: 'search',
-
-	query: function() {
-		console.log("query: "+this.querystr);
-		this.get('controllers.search').makeSearch(this.querystr);
-	}
-});
-
-//In case you're wondering, csl == 'comma-separated list'
-Handlebars.registerHelper('csl', function(array) {
-	var str = "";
-	
-	for (var i=0; i<array.length; i++) {
-		str+=array[i];
-		if (i<array.length-1) str+=", ";
-	}
-
-	return str;
-});
-
 Big.ResultsController = Ember.ArrayController.extend({
+	defaultPath: 'data/',
+
 	getData: function(data) {
-		this.set('content', data);
-		console.log(this.get('content'));
+		this.set('content', []);
+
+		for (var i=0; i<data.length; i++) {
+			var newObj = Ember.Object.create({
+				filepath: this.defaultPath+data[i].filename,
+				authors: data[i].author,
+				keywords: data[i].keywords,
+				title: data[i].title,
+				year: data[i].year,
+				periodic: 'dummy data',
+				classification: data[i].classification,
+				'abstract': data[i]['abstract'],
+				'institution': data[i].institution,
+				'id': data[i].id	
+			});
+			
+			this.pushObject(newObj);
+		}
 	}
 });
-
-

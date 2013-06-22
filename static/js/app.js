@@ -8,6 +8,7 @@ Big.Router.map(function() {
 		this.route('info', {path: 'info/:article_id'});
 	});
 	this.resource('article', {path: 'article/:article_id'});
+	this.route('upload');
 });
 
 Big.IndexRoute = Ember.Route.extend({
@@ -59,8 +60,30 @@ Big.SearchView = Ember.View.extend({
 	}
 });
 
-Big.Article = Ember.Object.extend();
+Big.ResultsController = Ember.ArrayController.extend({
+	defaultPath: 'data/',
 
+	getData: function(data) {
+		this.set('content', []);
+
+		for (var i=0; i<data.length; i++) {
+			var newObj = Ember.Object.create({
+				filepath: this.defaultPath+data[i].filename,
+				authors: data[i].author,
+				keywords: data[i].keywords,
+				title: data[i].title,
+				year: data[i].year,
+				periodic: 'dummy data',
+				classification: data[i].classification,
+				'abstract': data[i]['abstract'],
+				'institution': data[i].institution,
+				'id': data[i].id	
+			});
+			
+			this.pushObject(newObj);
+		}
+	}
+});
 Big.SearchController = Ember.Controller.extend({
 	searchUrlPrefix: 'api/search',
 	needs: 'results',
@@ -104,25 +127,6 @@ Big.SearchAdvController = Ember.Controller.extend({
 	query: function() {
 		console.log("query: "+this.querystr);
 		this.get('controllers.search').makeSearch(this.querystr);
-	}
-});
-
-//In case you're wondering, csl == 'comma-separated list'
-Handlebars.registerHelper('csl', function(array) {
-	var str = "";
-	
-	for (var i=0; i<array.length; i++) {
-		str+=array[i];
-		if (i<array.length-1) str+=", ";
-	}
-
-	return str;
-});
-
-Big.ResultsController = Ember.ArrayController.extend({
-	getData: function(data) {
-		this.set('content', data);
-		console.log(this.get('content'));
 	}
 });
 

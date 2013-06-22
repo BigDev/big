@@ -1,0 +1,14 @@
+script#upload(type="text/x-handlebars")
+	div.row-fluid
+		h1 Novo artigo
+		form.form-horizontal(name="upload")
+			mixin horizontal-input("title", "T&iacute;tulo")
+			mixin horizontal-input("authors", "Autor")
+			mixin horizontal-input("periodic", "Peri&oacute;dico/Institui&ccedil;&atilde;o")
+			mixin horizontal-input("year", "Ano de Publica&ccedil;&atilde;o")
+			mixin horizontal-input("keywords", "Palavras-chave")
+			mixin horizontal-input("capes", "Classifica&ccedil;&atilde;o CAPES")	
+			mixin horizontal-textarea("abstract", "Resumo")
+			div
+				|<button class="btn btn-primary" {{action formatInput}}>Upar</button>
+		

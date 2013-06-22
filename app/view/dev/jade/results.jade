@@ -12,11 +12,12 @@ script#article-list(type="text/x-handlebars")
 	ul.article-list
 		| {{#each controller}}
 		li
-			h2 {{title}}
-			h3 {{year}} - {{author}}
+			h2 {{#linkTo article this}}{{title}}{{/linkTo}}
+			h3.
+				{{year}} - {{authors}}
 			| {{institution}}/{{periodic}} ({{classification}})
-			| {{csl keywords}}
 			| {{#linkTo results.info this}}Detalhes{{/linkTo}}
+			| {{keywords}}
 		| {{else}}
 		| Nenhum resultado para sua busca //Needs some CSS magic!
 		| {{/each}}	
