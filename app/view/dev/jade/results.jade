@@ -14,8 +14,8 @@ script#article-list(type="text/x-handlebars")
 		li
 			h2 {{#linkTo article this}}{{title}}{{/linkTo}}
 			h3.
-				{{year}} - {{authors}}
-			| {{institution}}/{{periodic}} ({{classification}})
+				{{year}} - {{#csl author}}{{/csl}}
+			| {{institution}} ({{classification}})
 			| {{#linkTo results.info this}}Detalhes{{/linkTo}}
 			| {{keywords}}
 		| {{else}}

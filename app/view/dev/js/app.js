@@ -60,11 +60,16 @@ Big.SearchView = Ember.View.extend({
 	}
 });
 
+Handlebars.registerHelper('csl', function(arr) {
+	console.log (arr);
+});
+
 Big.ResultsController = Ember.ArrayController.extend({
 	defaultPath: 'data/',
 
 	getData: function(data) {
 		this.clear();
+		this.set('content', []);
 
 		for (var i=0; i<data.length; i++) {
 			var newObj = Ember.Object.create({
@@ -73,7 +78,6 @@ Big.ResultsController = Ember.ArrayController.extend({
 				keywords: data[i].keywords,
 				title: data[i].title,
 				year: data[i].year,
-				periodic: 'dummy data',
 				classification: data[i].classification,
 				'abstract': data[i]['abstract'],
 				'institution': data[i].institution,
@@ -82,36 +86,5 @@ Big.ResultsController = Ember.ArrayController.extend({
 			
 			this.pushObject(newObj);
 		}
-	}
-});
-
-function createHidden(inputName, inputValue) {
-	var el = document.createElement('input');
-	el.type="hidden";
-	el.name=inputName;
-	el.value=inputValue;
-	return el;
-}
-
-function multipleValues(inputName, formName) {
-	var form = document.forms[formName];
-	var field = form.elements[inputName];
-
-	var arr = field.value.split(",");
-	if (arr.length==0) return; 
-
-	field.value = escape($.trim(arr[0]));
-	
-	for (var i=1; i<arr.length; i++)
-		form.appendChild(createHidden(
-			field.name,	
-			escape($.trim(arr[i]))
-		));
-}
-
-Big.UploadView = Ember.View.extend({
-	submit: function() {
-		multipleValues("author", "upload");
-		multipleValues("keywords", "upload");
 	}
 });
