@@ -13,8 +13,10 @@ script#article-list(type="text/x-handlebars")
 		| {{#each controller}}
 		li
 			h2 {{title}}
-			p {{abstract}}
+			h3 {{year}} - {{author}}
 			| {{institution}}/{{periodic}} ({{classification}})
+			| {{csl keywords}}
+			| {{#linkTo results.info this}}Detalhes{{/linkTo}}
 		| {{else}}
 		| Nenhum resultado para sua busca //Needs some CSS magic!
 		| {{/each}}	

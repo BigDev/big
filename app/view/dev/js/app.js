@@ -79,7 +79,6 @@ Big.SearchController = Ember.Controller.extend({
 			url: this.buildUrl(querystring),
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(data);
 			me.get('controllers.results').getData(data.response.docs);
 		});
 		this.transitionToRoute('results.index');
@@ -108,10 +107,22 @@ Big.SearchAdvController = Ember.Controller.extend({
 	}
 });
 
+//In case you're wondering, csl == 'comma-separated list'
+Handlebars.registerHelper('csl', function(array) {
+	var str = "";
+	
+	for (var i=0; i<array.length; i++) {
+		str+=array[i];
+		if (i<array.length-1) str+=", ";
+	}
+
+	return str;
+});
+
 Big.ResultsController = Ember.ArrayController.extend({
 	getData: function(data) {
-		console.log(data);
 		this.set('content', data);
+		console.log(this.get('content'));
 	}
 });
 
