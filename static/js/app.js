@@ -4,7 +4,7 @@ Big.Router.map(function() {
 	this.resource('search', function() {
 		this.route('adv');
 	});
-	this.resource('results', function() {
+	this.resource('results', {path: '/:query'}, function() {
 		this.route('info', {path: 'info/:article_id'});
 	});
 	this.resource('article', {path: 'article/:article_id'});
@@ -67,10 +67,6 @@ Big.SearchView = Ember.View.extend({
 	}
 });
 
-Handlebars.registerHelper('csl', function(arr) {
-	console.log (arr);
-});
-
 Big.ResultsController = Ember.ArrayController.extend({
 	defaultPath: 'data/',
 
@@ -115,7 +111,7 @@ Big.SearchController = Ember.Controller.extend({
 		}).done(function(data) {
 			me.get('controllers.results').getData(data.response.docs);
 		});
-		this.transitionToRoute('results.index');
+		this.transitionToRoute('results.index', {query: 'meh'});
 	},
 
 	query: function() {
