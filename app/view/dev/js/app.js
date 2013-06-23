@@ -17,11 +17,18 @@ Big.IndexRoute = Ember.Route.extend({
 	}
 });
 
+Big.SearchIndexRoute = Ember.Route.extend({
+	renderTemplate: function() {
+		this.render();
+		this.render('search/index', {controller: 'Search'});
+	}
+});
+
 Big.ResultsRoute = Ember.Route.extend({
 	renderTemplate: function() {
 		this.render();
 		this.render('upper-search', {into: 'results', outlet: 'upperSearch',
-			controller: 'SearchIndex'});
+			controller: 'Search'});
 		this.render('article-list', {into: 'results', outlet: 'articleList'});
 	}
 });
@@ -30,7 +37,7 @@ Big.ArticleRoute = Ember.Route.extend({
 	renderTemplate: function() {
 		this.render();
 		this.render('upper-search', {into: 'article', outlet: 'upperSearch',
-			controller: 'SearchIndex'});
+			controller: 'Search'});
 		this.render('article-info', {into: 'article', outlet: 'articleInfo'});
 		this.render('article-pdf', {into: 'article', outlet: 'articlePdf'});	
 	}

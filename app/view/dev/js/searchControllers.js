@@ -19,19 +19,14 @@ Big.SearchController = Ember.Controller.extend({
 			me.get('controllers.results').getData(data.response.docs);
 		});
 		this.transitionToRoute('results.index');
-	}
-});
-
-Big.SearchIndexController = Ember.Controller.extend({
-	needs: 'search',
+	},
 
 	query: function() {
 		var querystr = document.forms["search"].elements["query"].value;
-		console.log(querystr);
 		querystr = $.trim(querystr);
 		if (!querystr)
 			return false;
-		this.get('controllers.search').makeSearch(querystr);
+		this.makeSearch(querystr);
 	}
 });
 

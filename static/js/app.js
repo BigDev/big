@@ -17,11 +17,18 @@ Big.IndexRoute = Ember.Route.extend({
 	}
 });
 
+Big.SearchIndexRoute = Ember.Route.extend({
+	renderTemplate: function() {
+		this.render();
+		this.render('search/index', {controller: 'Search'});
+	}
+});
+
 Big.ResultsRoute = Ember.Route.extend({
 	renderTemplate: function() {
 		this.render();
 		this.render('upper-search', {into: 'results', outlet: 'upperSearch',
-			controller: 'SearchIndex'});
+			controller: 'Search'});
 		this.render('article-list', {into: 'results', outlet: 'articleList'});
 	}
 });
@@ -30,7 +37,7 @@ Big.ArticleRoute = Ember.Route.extend({
 	renderTemplate: function() {
 		this.render();
 		this.render('upper-search', {into: 'article', outlet: 'upperSearch',
-			controller: 'SearchIndex'});
+			controller: 'Search'});
 		this.render('article-info', {into: 'article', outlet: 'articleInfo'});
 		this.render('article-pdf', {into: 'article', outlet: 'articlePdf'});	
 	}
@@ -109,19 +116,14 @@ Big.SearchController = Ember.Controller.extend({
 			me.get('controllers.results').getData(data.response.docs);
 		});
 		this.transitionToRoute('results.index');
-	}
-});
-
-Big.SearchIndexController = Ember.Controller.extend({
-	needs: 'search',
+	},
 
 	query: function() {
 		var querystr = document.forms["search"].elements["query"].value;
-		console.log(querystr);
 		querystr = $.trim(querystr);
 		if (!querystr)
 			return false;
-		this.get('controllers.search').makeSearch(querystr);
+		this.makeSearch(querystr);
 	}
 });
 

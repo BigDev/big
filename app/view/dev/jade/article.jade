@@ -1,3 +1,6 @@
+script#article-pdf(type="text/x-handlebars")
+	| <iframe width="100%" height="100%" {{bindAttr src="filepath"}}></iframe>
+
 script#article(type="text/x-handlebars")
 	div.row-fluid.
 		{{outlet upperSearch}}
@@ -6,6 +9,3 @@ script#article(type="text/x-handlebars")
 			{{outlet articleInfo}}
 		div.span8.
 			{{outlet articlePdf}}
-
-script#article-pdf(type="text/x-handlebars")
-	| <iframe width="100%" height="100%" {{bindAttr src="filepath"}}></iframe>

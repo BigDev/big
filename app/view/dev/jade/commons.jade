@@ -15,14 +15,20 @@ mixin horizontal-textarea(inputName, inputLabel)
 		label.control-label(for=inputName)= inputLabel
 		div.controls
 			textarea(name=inputName)
+
+script#layout(type="text/x-handlebars")
+	div.row-fluid.
+		{{outlet upperSearch}}
+	div.row-fluid.
+		{{outlet content}}
 	
 script#upper-search(type="text/x-handlebars")
 	div#upper-bar.span12
 		div.span2
 			h1 BIG Busca
 		form.form-inline(name="search")
-			div.span4.offset1
-				input.input-block-level(type="text", name="query")
+			div.span4.offset1.
+				<input type="text" class="input-block-level" {{bindAttr value="controllers.search.querystr"}} name="query" />
 			div.span1.
 				<button class="btn btn-primary" {{action query}} />Buscar</button>
 	
