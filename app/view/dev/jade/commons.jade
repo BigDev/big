@@ -19,7 +19,7 @@ mixin horizontal-textarea(inputName, inputLabel)
 script#layout(type="text/x-handlebars")
 	div.row-fluid.
 		{{outlet upperSearch}}
-	div.row-fluid.
+	div#content-area.row-fluid.
 		{{outlet content}}
 	
 script#upper-search(type="text/x-handlebars")

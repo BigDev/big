@@ -2,6 +2,10 @@
 @padding-top-bottom: 1%;
 @margin-button: 1%;
 
+.container-fluid {
+	height: 100%;
+}
+
 #upper-bar {
 	height: @upper-bar-w;
 	padding-top: @padding-top-bottom;
@@ -21,4 +25,8 @@
 			margin-left: @margin-button;
 		}	
 	}
+}
+
+#content-area {
+	height: 100% - @upper-bar-w - 2*@padding-top-bottom;
 }

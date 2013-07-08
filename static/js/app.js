@@ -4,7 +4,7 @@ Big.Router.map(function() {
 	this.resource('search', function() {
 		this.route('adv');
 	});
-	this.resource('results', {path: '/:query'}, function() {
+	this.resource('results', {path: 'results'}, function() {
 		this.route('info', {path: 'info/:article_id'});
 	});
 	this.resource('article', {path: 'article/:article_id'});
