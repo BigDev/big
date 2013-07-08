@@ -111,7 +111,7 @@ Big.SearchController = Ember.Controller.extend({
 		}).done(function(data) {
 			me.get('controllers.results').getData(data.response.docs);
 		});
-		this.transitionToRoute('results.index', {query: 'meh'});
+		this.transitionToRoute('results.index');
 	},
 
 	query: function() {
